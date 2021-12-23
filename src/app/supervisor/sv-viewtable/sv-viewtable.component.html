@@ -1,0 +1,72 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="SNo">
+    <th mat-header-cell *matHeaderCellDef>SNo.</th>
+    <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>Username</th>
+    <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Bay">
+    <th mat-header-cell *matHeaderCellDef>Bay</th>
+    <td mat-cell *matCellDef="let element">{{ element.Bay }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="CellName">
+    <th mat-header-cell *matHeaderCellDef>Cell Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.CellName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ChecklistName">
+    <th mat-header-cell *matHeaderCellDef>Checklist Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.ChecklistName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="UpdatedTime">
+    <th mat-header-cell *matHeaderCellDef>Updated Time</th>
+    <td mat-cell *matCellDef="let element">{{ element.UpdatedTime }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>View</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon style="color: green" (click)="onTable(element)"
+        >visibility</mat-icon
+      >
+    </td></ng-container
+  >
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        class="badge"
+        [ngClass]="{
+          'bg-warning': element.status == 'Pending',
+          'bg-success': element.status == 'Approved',
+          'bg-danger': element.status == 'Rejected'
+        }"
+        mat-flat-button
+        [matMenuTriggerFor]="statusMenu"
+      >
+        {{ element.status }}
+      </button>
+      <mat-menu #statusMenu="matMenu" yPosition="above">
+        <button mat-menu-item (click)="onStatusUpdate(element, 'Approved')">
+          Approved
+        </button>
+        <button mat-menu-item (click)="onStatusUpdate(element, 'Rejected')">
+          Rejected
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<!-- [matMenuTriggerFor]="element.status == 'Pending' ? statusMenu : noData" -->

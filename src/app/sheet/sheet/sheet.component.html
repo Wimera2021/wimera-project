@@ -1,0 +1,52 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="Bay">
+    <th mat-header-cell *matHeaderCellDef>Bay</th>
+    <td mat-cell *matCellDef="let element">{{ element.Bay }}</td>
+  </ng-container>
+  <ng-container matColumnDef="CellName">
+    <th mat-header-cell *matHeaderCellDef>Cell Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.CellName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ChecklistName">
+    <th mat-header-cell *matHeaderCellDef>Checklist of the cells</th>
+    <td mat-cell *matCellDef="let element">{{ element.ChecklistName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="OpNo">
+    <th mat-header-cell *matHeaderCellDef>Operation Number</th>
+    <td mat-cell *matCellDef="let element">{{ element.OpNo }}</td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon style="color: green" (click)="onEdit(element)">edit</mat-icon
+      >&nbsp;
+      <mat-icon style="color: red" (click)="onDelete(element)"
+        >delete_outline</mat-icon
+      >
+    </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<div class="btn-row">
+  <!-- <button
+    color="primary"
+    mat-raised-button
+    (click)="onAddItem()"
+    *ngIf="machines.length > 0"
+  >
+    <mat-icon>add</mat-icon>
+    Add
+  </button> -->
+  <button color="primary" mat-raised-button (click)="showDialog()">
+    <mat-icon>file_upload</mat-icon>
+    Import file
+  </button>
+</div>
+<hr />
+<h1 *ngIf="sheet.length <= 0 && !isLoading">No machines added yet!</h1>

@@ -1,0 +1,27 @@
+<form class="role-form" #f="ngForm" (submit)="oncreateCell(f)">
+  <h1 mat-dialog-title>Enter the values</h1>
+
+  <ng-container>
+    <mat-form-field>
+      <mat-label>Bay No.</mat-label>
+      <input matInput name="Bay" ngModel required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cell Name</mat-label>
+      <input matInput name="cellName" ngModel required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Checklist in this cell</mat-label>
+      <input matInput name="checklistName" ngModel required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Machine Number</mat-label>
+      <input matInput name="MacNo" ngModel required />
+    </mat-form-field>
+  </ng-container>
+
+  <div class="button-row">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button mat-raised-button color="warn" (click)="onCancel(f)">Cancel</button>
+  </div>
+</form>

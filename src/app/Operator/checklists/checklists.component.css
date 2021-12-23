@@ -1,0 +1,54 @@
+table {
+  width: 100%;
+}
+
+body {
+  background-color: #fff;
+  color: black;
+}
+.grid {
+  max-width: 1200px;
+  margin: auto;
+  color: #fff;
+}
+
+.grid h2 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 600px;
+  margin: auto;
+  font-size: 26px;
+  color: black;
+  text-align: center;
+}
+
+.grid-cards-inner h1 {
+  font-size: 25px;
+  text-align: center;
+}
+
+.header-section {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  cursor: pointer;
+}
+
+.grid-cards div {
+  background-color: #453381;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.opvalues {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  padding-top: 50px;
+}

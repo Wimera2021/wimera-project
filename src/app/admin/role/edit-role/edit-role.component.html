@@ -1,0 +1,37 @@
+<form class="role-form" #f="ngForm" (submit)="onUpdate(f)">
+  <h1 mat-dialog-title>Enter the values</h1>
+
+  <ng-container>
+    <mat-form-field>
+      <mat-label>Role Name</mat-label>
+      <input matInput name="RoleName" [ngModel]="user?.RoleName" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>User Name</mat-label>
+      <input matInput name="userName" [ngModel]="user?.userName" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput name="Password" [ngModel]="user?.Password" required />
+    </mat-form-field>
+
+    <mat-label>Allocated cells</mat-label>
+    <p *ngFor="let cell of cells; let i = index">
+      <mat-checkbox
+        [checked]="cell.isSelected"
+        (change)="onCheckEvent(cell.value, $event)"
+      >
+        {{ cell.value }}
+      </mat-checkbox>
+    </p>
+
+    <!-- <mat-form-field>
+      <mat-label>Allocated checksheets</mat-label>
+    </mat-form-field> -->
+  </ng-container>
+
+  <div class="button-row">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button mat-raised-button color="warn" (click)="onCancel(f)">Cancel</button>
+  </div>
+</form>

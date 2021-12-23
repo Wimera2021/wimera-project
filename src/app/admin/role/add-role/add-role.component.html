@@ -1,0 +1,111 @@
+<h1 mat-dialog-title>Roles</h1>
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Operator">
+    <form class="role-form" #f="ngForm" (submit)="oncreateRole(f)">
+      <ng-container>
+        <mat-form-field>
+          <mat-label>Role Name</mat-label>
+          <input matInput name="RoleName" ngModel required />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>User Name</mat-label>
+          <input matInput name="userName" ngModel required />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            name="Password"
+            [type]="hide ? 'password' : 'text'"
+            ngModel
+            required
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Bay</mat-label>
+              <mat-select name="Bay" (selectionChange)="onBaySelect($event)">
+                <mat-option *ngFor="let val of bay" [value]="val">
+                  {{ val }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div *ngIf="isBaySelected">
+              <mat-form-field>
+                <mat-label>Cell Name</mat-label>
+                <mat-select
+                  name="Cell"
+                  [(ngModel)]="cellSelect"
+                  (selectionChange)="onCellSelect($event)"
+                >
+                  <mat-option *ngFor="let val of cells" [value]="val">
+                    {{ val }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col" *ngIf="isChecklist">
+            Checklists:
+            <p *ngFor="let cell of checklist; let i = index">
+              <mat-checkbox
+                (change)="onCheckChecklist(cell, $event)"
+                [(ngModel)]="checkedArray[i]"
+                name="cell"
+              >
+                {{ cell }}
+              </mat-checkbox>
+            </p>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="button-row">
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" (click)="onCancel(f)">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-tab>
+
+  <mat-tab label="Supervisor">
+    <form class="role-form" #form="ngForm" (submit)="onSubmitSV(form)">
+      <ng-container>
+        <mat-form-field>
+          <mat-label>Role Name</mat-label>
+          <input matInput name="roleName" ngModel required />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>User Name</mat-label>
+          <input matInput name="username" ngModel required />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            name="password"
+            [type]="hide ? 'password' : 'text'"
+            ngModel
+            required
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </ng-container>
+
+      <div class="button-row">
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button mat-raised-button color="warn" (click)="onCancel(f)">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-tab>
+</mat-tab-group>

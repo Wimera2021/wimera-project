@@ -1,0 +1,124 @@
+<!-- <button mat-icon-button class="btn-close" (click)="onClose()">
+  <mat-icon>close</mat-icon>
+</button> -->
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<mat-stepper #stepper>
+  <mat-step
+    [stepControl]="firstFormGroup"
+    errorMessage="Requirements are required."
+  >
+    <form [formGroup]="firstFormGroup" class="form1">
+      <ng-template matStepLabel>Requirements</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Bay</mat-label>
+        <mat-select
+          formControlName="bay"
+          (selectionChange)="onSelectBay($event)"
+        >
+          <mat-option *ngFor="let bay of bays; let i = index" [value]="bay">
+            {{ bay }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Cell</mat-label>
+        <mat-select
+          formControlName="cell"
+          (selectionChange)="onSelectCell($event)"
+        >
+          <mat-option *ngFor="let cell of cells" [value]="cell">
+            {{ cell }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Checklist name</mat-label>
+        <mat-select formControlName="checklist">
+          <mat-option *ngFor="let val of checkLists" [value]="val">
+            {{ val }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Opertaion No:</mat-label>
+        <input matInput formControlName="opNo" required />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext (click)="onForm1()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="File is required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>File</ng-template>
+
+      <input
+        type="file"
+        formControlName="file"
+        id="csvFileUpload"
+        (change)="fileChangeListener($event)"
+        accept=".csv"
+        required
+      />
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="onForm2()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step errorMessage="Row is required.">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Row header</ng-template>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="row"
+        [(ngModel)]="SelectedRadio"
+        required
+      >
+        <mat-radio-button
+          *ngFor="let control of rows; let i = index"
+          [value]="control.value"
+          class="example-radio-button"
+        >
+          {{ control.name }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="onForm3()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step errorMessage="Columns are required.">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Columns</ng-template>
+      <p>Choose Column values</p>
+      <mat-dialog-content
+        ><p
+          *ngFor="let control of csvRecords[row]; let i = index"
+          style="max-height: inherit"
+        >
+          <mat-checkbox
+            id="inlineCheckbox{{ i }}"
+            formControlName="column"
+            (change)="getSelectedColumn(csvRecords[row][i], $event, i)"
+          >
+            {{ csvRecords[row][i] }}</mat-checkbox
+          >
+        </p></mat-dialog-content
+      >
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-raised-button color="primary" (click)="onAddFile()">
+          Save & Import
+        </button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>

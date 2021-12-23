@@ -1,0 +1,96 @@
+<mat-tab-group (selectedTabChange)="onBayChange($event)">
+  <ng-container *ngFor="let bay of bays">
+    <mat-tab label="Bay {{ bay }}">
+      <ng-template matTabContent>
+        <mat-button-toggle-group
+          name="fontStyle"
+          appearance="legacy"
+          aria-label="Font Style"
+        >
+          <ng-container *ngFor="let cell of cells; let i = index">
+            <mat-button-toggle
+              (change)="onCellChange($event, bay)"
+              value="{{ cell }}"
+              >{{ cell }}</mat-button-toggle
+            >
+          </ng-container>
+        </mat-button-toggle-group>
+        <div class="wrapper">
+          <section class="left">
+            <div class="btn">
+              <ng-container *ngFor="let cell of lists">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="onClick(cell)"
+                >
+                  {{ cell }}
+                </button>
+              </ng-container>
+            </div>
+          </section>
+          <section class="right">
+            <h2 class="textright" *ngIf="NoVal">
+              Choose the checklist to be displayed
+            </h2>
+            <h2 class="textright" *ngIf="isSheet">No values added yet</h2>
+            <div class="example-container mat-elevation-z8" *ngIf="isTable">
+              <div>
+                <!-- Table Values-->
+                <mat-table #table [dataSource]="dataSource">
+                  <ng-container
+                    *ngFor="
+                      let disCol of dynamicDisplayedColumns;
+                      let colIndex = index
+                    "
+                    matColumnDef="{{ disCol }}"
+                  >
+                    <mat-header-cell *matHeaderCellDef>{{
+                      disCol
+                    }}</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      {{ element[disCol] }}
+                    </mat-cell>
+                  </ng-container>
+                  <mat-header-row
+                    *matHeaderRowDef="dynamicDisplayedColumns; sticky: true"
+                  ></mat-header-row>
+                  <mat-row
+                    *matRowDef="let row; columns: dynamicDisplayedColumns"
+                  ></mat-row>
+                </mat-table>
+              </div>
+              <mat-paginator #paginator [pageSizeOptions]="[10, 20, 30]">
+              </mat-paginator>
+            </div>
+          </section>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>
+
+<!-- <mat-tab-group mat-align-tabs="start" (selectedTabChange)="onTabChange($event)">
+  <ng-container *ngFor="let cell of cells; let i = index">
+    <mat-tab label="{{ cell }}">
+      <div class="wrapper">
+        <section class="left">
+          <div class="btn">
+            <ng-container *ngFor="let cell of lists">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="onClick(i, cell)"
+              >
+                {{ cell }}
+              </button>
+            </ng-container>
+          </div>
+        </section>
+        <section class="right">
+          <app-machine-list></app-machine-list>
+        </section>
+      </div>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group> -->

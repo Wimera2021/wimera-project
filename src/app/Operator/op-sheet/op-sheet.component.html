@@ -1,0 +1,61 @@
+<body>
+  <div class="display-field">
+    <form class="role-form">
+      <mat-form-field>
+        <mat-label>Bay</mat-label>
+        <input matInput name="bay" [ngModel]="bay" value="bay" readonly />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cell Name</mat-label>
+        <input matInput name="cell" [ngModel]="cell" value="cell" readonly />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Checklist</mat-label>
+        <input
+          matInput
+          name="checklist"
+          [ngModel]="checklist"
+          value="checklist"
+          readonly
+        />
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="mat-elevation-z8">
+    <div class="table-container">
+      <table mat-table #table [dataSource]="dataSource">
+        <ng-container
+          *ngFor="let disCol of dynamicDisplayedColumns; let colIndex = index"
+          matColumnDef="{{ disCol }}"
+        >
+          <th mat-header-cell *matHeaderCellDef>
+            {{ disCol }}
+          </th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <span *ngIf="disCol != today"> {{ element[disCol] }} </span>
+            <div *ngIf="disCol == today">
+              <form>
+                <mat-form-field>
+                  <mat-label>Comments</mat-label>
+                  <input
+                    matInput
+                    name="Comments"
+                    [(ngModel)]="row[i]"
+                    [ngModel]="element[disCol]"
+                  />
+                </mat-form-field>
+              </form>
+            </div>
+          </td>
+        </ng-container>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="dynamicDisplayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: dynamicDisplayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+  <button mat-raised-button color="primary" (click)="onBack()">Back</button>
+  <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
+</body>

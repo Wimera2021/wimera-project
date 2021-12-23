@@ -1,0 +1,44 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef>Role</th>
+    <td mat-cell *matCellDef="let element">{{ element.RoleName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="user">
+    <th mat-header-cell *matHeaderCellDef>Username</th>
+    <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cell">
+    <th mat-header-cell *matHeaderCellDef>Access</th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngFor="let cell of element.cell">
+        [Bay {{ cell.Bay }},{{ cell.cellName }},{{ cell.checklistName }}]
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="cell">
+    <th mat-header-cell *matHeaderCellDef>Allocated cells</th>
+    <td mat-cell *matCellDef="let element">
+      [{{ element.cell[0].cellName }},{{ element.cell[0].checklistName }}
+    </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon style="color: green" (click)="onEdit(element)">edit</mat-icon
+      >&nbsp;
+      <mat-icon style="color: red" (click)="onDelete(element)"
+        >delete_outline</mat-icon
+      >
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<button mat-raised-button color="primary" (click)="onAddRole()">Add</button>

@@ -1,0 +1,46 @@
+table {
+  overflow: auto;
+  max-height: 650px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 650px;
+  width: 100%;
+}
+
+.mat-table .mat-cell,
+.mat-table .mat-header-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  margin-left: 10px;
+}
+
+.mat-table .mat-cell:not(:nth-child(1)),
+.mat-table .mat-header-cell:not(:nth-child(1)) {
+  padding: 0 10px;
+}
+
+.close-button {
+  float: right;
+  top: -24px;
+  right: -24px;
+  background-color: white;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+
+::ng-deep .icon-outside .close-button {
+  float: right;
+  top: -52px;
+  right: -52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset;
+}

@@ -1,0 +1,53 @@
+body {
+  background-color: #fff;
+}
+
+.table-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: auto;
+  max-height: 700px;
+}
+
+table {
+  overflow: auto;
+  max-height: 650px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 650px;
+  width: 100%;
+}
+
+.display-field {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+mat-form-field {
+  margin-right: 20px;
+}
+
+button {
+  float: right;
+  margin: 10px;
+}
+
+/* .mat-column-SNo {
+  flex: 0 0 10%;
+} */
+
+.mat-table .mat-cell,
+.mat-table .mat-header-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  margin-left: 10px;
+}
+
+.mat-table .mat-cell:not(:nth-child(1)),
+.mat-table .mat-header-cell:not(:nth-child(1)) {
+  padding: 0 10px;
+}

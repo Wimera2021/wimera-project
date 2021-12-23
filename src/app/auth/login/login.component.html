@@ -1,0 +1,47 @@
+<div class="main-wrapper">
+  <mat-card>
+    <mat-card-content>
+      <form #f="ngForm" (submit)="onLogin(f)">
+        <h2>Log In</h2>
+        <mat-form-field class="full-width-input">
+          <input
+            matInput
+            placeholder="User Name"
+            name="userName"
+            ngModel
+            required
+          />
+          <mat-error> Please provide a valid user name </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input
+            matInput
+            type="text"
+            placeholder="Role"
+            name="role"
+            ngModel
+            required
+          />
+          <mat-error> Please provide a valid role </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            name="password"
+            [type]="hide ? 'password' : 'text'"
+            ngModel
+            required
+          />
+          <mat-icon style="cursor: pointer" matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error> Please provide a valid password </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

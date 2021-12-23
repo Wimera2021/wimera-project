@@ -1,0 +1,72 @@
+<body>
+  <div *ngIf="!isNavigate">
+    <section class="header-section">
+      <ng-container>
+        <div class="opvalues">
+          <mat-form-field>
+            <mat-label>Bay </mat-label>
+            <mat-select
+              ngModel
+              name="bay"
+              (selectionChange)="onSelectBay($event)"
+              required
+            >
+              <mat-option *ngFor="let bay of bays" [value]="bay">
+                {{ bay }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Cell </mat-label>
+            <mat-select
+              ngModel
+              name="cell"
+              (selectionChange)="onSelectCell($event)"
+              required
+            >
+              <mat-option
+                *ngFor="let cell of cellvals; let i = index"
+                [value]="cell"
+              >
+                {{ cell }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="btn">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              (click)="onChoose()"
+            >
+              Fetch Checklists
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </section>
+    <div class="grid">
+      <div *ngIf="!ischecklist">
+        <h2>Choose the Checklists to be displayed</h2>
+      </div>
+      <div *ngIf="ischecklist">
+        <h2>Checklists</h2>
+        <div class="grid-cards">
+          <div
+            class="grid-cards-inner"
+            *ngFor="let val of checkLists"
+            (click)="onclickDiv(val)"
+          >
+            <div>
+              <!-- <h1>{{ val.id }}</h1> -->
+              <h1>{{ val.checklist }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</body>

@@ -1,0 +1,51 @@
+h1 {
+  text-align: center;
+}
+
+/* .row {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+} */
+
+/* .col {
+  display: flex;
+  flex-direction: column !important;
+  flex-wrap: nowrap;
+} */
+
+button {
+  margin: 20px 20px 0 0;
+  float: right;
+}
+
+mat-form-field {
+  padding-top: 10px;
+}
+
+.role-form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
